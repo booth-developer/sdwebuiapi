@@ -55,7 +55,7 @@ class WebUIApiResult:
 class ControlNetUnit:
     def __init__(
         self,
-        image: Image = None,
+        image: Optional[Union[Image, List[Image]]] = None,
         mask: Image = None,
         module: str = "none",
         model: str = "None",
@@ -73,7 +73,7 @@ class ControlNetUnit:
         hr_option: str = "Both", # Both, Low res only, High res only
         enabled: bool = True,
     ):
-        self.image = image
+        self.image = [image] if image and type(image) is not list else image
         self.mask = mask
         self.module = module
         self.model = model
@@ -106,7 +106,7 @@ class ControlNetUnit:
 
     def to_dict(self):
         return {
-            "image": raw_b64_img(self.image) if self.image else "",
+            "image": [{"image": raw_b64_img(image)} for image in self.image] if self.image else "",
             "mask": raw_b64_img(self.mask) if self.mask is not None else None,
             "module": self.module,
             "model": self.model,
