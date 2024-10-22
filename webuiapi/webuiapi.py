@@ -63,11 +63,11 @@ class ControlNetUnit:
         resize_mode: str = "Resize and Fill",
         low_vram: bool = False,
         processor_res: int = 512,
-        threshold_a: float = 64,
-        threshold_b: float = 64,
+        threshold_a: float = 0.5,
+        threshold_b: float = 0.5,
         guidance_start: float = 0.0,
         guidance_end: float = 1.0,
-        control_mode: int = 0,
+        control_mode: str = "Balanced",
         pixel_perfect: bool = False,
         guessmode: int = None,  # deprecated: use control_mode
         hr_option: str = "Both", # Both, Low res only, High res only
